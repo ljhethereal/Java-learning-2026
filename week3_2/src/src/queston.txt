@@ -1,0 +1,40 @@
+/**
+ * 题目：员工薪资管理系统
+ *
+ * 1. 父类 Employee (抽象类):
+ *    - 属性: name (String), baseSalary (double)
+ *    - 构造器: 全参构造，并在其中打印 "Employee 构造器被调用"
+ *    - 抽象方法: double calcSalary()
+ *    - 具体方法: String getInfo() 返回 "姓名: xxx, 基本薪资: xxx"
+ *
+ * 2. 子类 Manager (经理):
+ *    - 新增属性: bonus (double, 奖金)
+ *    - 构造器: 全参 (name, baseSalary, bonus)，并在其中打印 "Manager 构造器被调用"
+ *    - 实现 calcSalary(): 返回 baseSalary + bonus
+ *
+ * 3. 子类 Developer (程序员):
+ *    - 新增属性: hourlyRate (double, 时薪), hours (int, 工时)
+ *    - 构造器: 全参 (name, baseSalary, hourlyRate, hours)
+ *      - 校验: 如果 hours > 168 (一周最大小时数)，抛 IllegalArgumentException("工时超标")
+ *      - 打印: "Developer 构造器被调用"
+ *    - 实现 calcSalary(): 返回 baseSalary + hourlyRate * hours
+ *
+ * 4. 工具类 PayrollSystem:
+ *    - 静态方法: void printPayroll(Employee[] staff)
+ *      遍历数组，打印每位员工的 Info 和最终薪资。
+ *    - 静态方法: double getTotalCost(Employee[] staff)
+ *      计算公司当月总人力成本。
+ *
+ * 5. TestStaff 测试类:
+ *    - 创建 1 个 Manager 和 2 个 Developer。
+ *    - 演示正常计算薪资。
+ *    - 演示传入非法工时（如 200 小时），捕获异常并提示。
+ *    - 输出总人力成本。
+ *
+ * 交付要求：
+ * - 代码文件: Employee.java, Manager.java, Developer.java, PayrollSystem.java, TestStaff.java
+ * - 运行截图: 展示构造器调用顺序 + 正常薪资计算 + 异常捕获场景 + 总成本
+ * - 思考题:
+ *   ① 为什么在子类构造器中必须第一行调用 super(...)？
+ *   ② 如果 Developer 的 hours 校验失败，父类 Employee 的构造器会执行吗？为什么？
+ */
