@@ -1,0 +1,26 @@
+/**
+ * 要求：
+ * 1. 定义 Student 类：id(int), name(String), score(double)
+ *    - 重写 toString(), equals(), hashCode()
+ *    - 实现 Comparable<Student> 接口，按分数降序排序
+ *
+ * 2. 使用 ArrayList<Student> 存储多个学生对象
+ *    - 添加 5 个学生数据
+ *    - 演示：添加、删除、查找（按姓名）、修改分数
+ *
+ * 3. 使用 HashMap<Integer, Student> 建立 ID -> 学生的索引
+ *    - 演示：快速通过 ID 查找学生
+ *
+ * 4. 使用 Collections.sort() 对 List 进行排序（分别演示自然排序和 Comparator 定制排序）
+ *
+ * 5. main 方法测试：
+ *    - 输出原始列表
+ *    - 输出按分数排序后的列表
+ *    - 输出按姓名排序后的列表（使用 Comparator）
+ *    - 演示通过 ID 快速查找
+ *
+ * 交付要求：
+ * - 代码文件：Student.java, TestStudentSystem.java
+ * - 运行截图：展示增删改查 + 两种排序结果 + Map 查找
+ * - 思考题：为什么 HashMap 查找比 ArrayList 快？
+ */
