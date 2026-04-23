@@ -1,0 +1,35 @@
+/**
+ * 题目：简易购物车系统
+ *
+ * 1. 定义 Product 类:
+ *    - 属性: id(int), name(String), price(double)
+ *    - 构造器: 全参构造
+ *    - 重写: toString(), equals(), hashCode()（以 id 为唯一标识）
+ *
+ * 2. 购物车核心逻辑:
+ *    - 使用 LinkedHashSet<Product> 存储商品清单（去重 + 保持首次添加顺序）
+ *    - 使用 HashMap<Product, Integer> 记录购买数量（Key: 商品, Value: 数量）
+ *
+ * 3. 业务方法实现:
+ *    - addProduct(Product p, int qty):
+ *      将商品加入 Set，并在 Map 中累加数量（若已存在则 qty += 原数量）
+ *    - removeProduct(int productId):
+ *      从 Set 和 Map 中同时移除该商品
+ *    - printReceipt():
+ *      遍历 Set（保证顺序），根据 id 从 Map 查数量，打印购物小票
+ *      格式: | 商品名 | 单价 | 数量 | 小计 |
+ *    - calculateTotal():
+ *      计算订单总金额并返回
+ *
+ * 4. main 方法测试流程:
+ *    - 创建 3 种商品：手机(1001, 5000), 耳机(1002, 300), 手机(1001, 5000) [重复添加]
+ *    - 调用 addProduct 分别加入数量: 1, 2, 1（验证去重与数量累加）
+ *    - 移除耳机(1002)
+ *    - 打印最终购物小票
+ *    - 输出订单总金额
+ *
+ * 交付要求:
+ * - 代码文件: Product.java, ShoppingCart.java, TestCart.java
+ * - 运行截图: 展示去重效果 + 数量累加 + 移除商品 + 完整小票与总价
+ * - 思考题: 为什么 Product 必须重写 equals 和 hashCode 才能作为 HashMap 的 Key？
+ */
