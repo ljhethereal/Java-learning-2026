@@ -1,0 +1,22 @@
+/**
+ * 要求：
+ * 1. 定义泛型类 SimpleList<T>：
+ *    - 内部使用 Object[] 数组存储数据 (初始容量 10)
+ *    - 属性：size (当前元素个数)
+ *
+ * 2. 实现核心方法：
+ *    - boolean add(T element): 添加元素，若数组满则扩容 (新数组 = 旧数组 * 1.5)
+ *    - T get(int index): 获取元素 (需检查索引越界)
+ *    - int size(): 返回当前元素个数
+ *    - void remove(int index): 删除元素，后续元素前移
+ *
+ * 3. TestSimpleList 测试类：
+ *    - 创建 SimpleList<String>，添加 3 个字符串，打印。
+ *    - 创建 SimpleList<Integer>，添加 3 个数字，打印。
+ *    - 演示泛型带来的好处：尝试添加错误类型 (如往 String 列表加 Integer) 看编译报错。
+ *
+ * 交付要求：
+ * - 代码文件：SimpleList.java, TestSimpleList.java
+ * - 运行截图：展示添加、获取、泛型类型检查效果
+ * - 思考题：为什么内部用 Object[] 存储，但 get 出来却是 T 类型？(提示：强制类型转换)
+ */
