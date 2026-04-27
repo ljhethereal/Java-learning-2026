@@ -1,0 +1,24 @@
+/**
+ * 要求：
+ * 1. 定义 FileUtils 工具类：
+ *
+ * 2. 实现方法 countJavaFiles(String dirPath):
+ *    - 递归遍历指定目录
+ *    - 统计以 ".java" 结尾的文件数量
+ *    - 打印每个找到的 .java 文件绝对路径
+ *
+ * 3. 实现方法 copyFile(String srcPath, String destPath):
+ *    - 使用字节流 (FileInputStream / FileOutputStream)
+ *    - 使用缓冲区 (byte[1024]) 提高性能
+ *    - 必须使用 try-with-resources 自动关闭流
+ *    - 处理 FileNotFoundException 和 IOException
+ *
+ * 4. TestFileManager 测试类：
+ *    - 调用 countJavaFiles 统计你的 "E:/Java/javaProject/weekPractice" 目录。
+ *    - 调用 copyFile 复制一个图片文件或 TXT 文件，验证复制后的文件是否一致。
+ *
+ * 交付要求：
+ * - 代码文件：FileUtils.java, TestFileManager.java
+ * - 运行截图：展示递归统计结果 + 文件复制成功的提示
+ * - 思考题：为什么复制图片必须用字节流，不能用字符流？
+ */
