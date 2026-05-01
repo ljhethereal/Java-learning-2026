@@ -1,0 +1,97 @@
+/**
+ * 题目：银行账户异常处理系统
+ *
+ * 背景：
+ * 设计一个健壮的银行账户系统，要求通过自定义异常、异常链和资源管理，
+ * 实现安全的转账功能，并能优雅地处理各种异常情况。
+ *
+ * 要求：
+ *
+ * 1. 自定义异常类（2个）：
+ *    - InsufficientBalanceException extends Exception（编译期异常）
+ *      • 属性：currentBalance（当前余额）, requestedAmount（请求金额）
+ *      • 构造器：全参构造 + 带原始异常的构造（异常链）
+ *      • 重写：toString() 返回详细错误信息
+ *
+ *    - InvalidAccountException extends RuntimeException（运行时异常）
+ *      • 属性：errorCode（错误码）, message（错误信息）
+ *      • 构造器：全参构造
+ *      • 重写：toString()
+ *
+ * 2. 定义 BankAccount 类：
+ *    - 属性：
+ *      • accountNo（String）：账号
+ *      • balance（double）：余额
+ *      • owner（String）：户主姓名
+ *      • transactionLog（List<String>）：交易日志
+ *
+ *    - 构造器：
+ *      • BankAccount(String accountNo, String owner, double initialBalance)
+ *        - 校验：initialBalance >= 0，否则抛 InvalidAccountException
+ *
+ *    - 方法：
+ *      • void deposit(double amount)
+ *        - 校验：amount > 0，否则抛 InvalidAccountException("存款金额必须大于0")
+ *        - 功能：增加余额，记录日志
+ *
+ *      • void withdraw(double amount) throws InsufficientBalanceException
+ *        - 校验1：amount > 0，否则抛 InvalidAccountException("取款金额必须大于0")
+ *        - 校验2：amount <= balance，否则抛 InsufficientBalanceException（携带当前余额和请求金额）
+ *        - 功能：减少余额，记录日志
+ *
+ *      • void transfer(BankAccount target, double amount) throws InsufficientBalanceException
+ *        - 校验1：target != null，否则抛 InvalidAccountException("目标账户不能为空")
+ *        - 校验2：this != target，否则抛 InvalidAccountException("不能转账给自己")
+ *        - 功能：先 withdraw，再 target.deposit
+ *        - 异常处理：如果 withdraw 成功但 deposit 失败，需要回滚（本题简化：不要求事务）
+ *        - 记录日志：包含转账金额和目标账号
+ *
+ *      • String getTransactionHistory()
+ *        - 返回所有交易日志，每行一条
+ *
+ * 3. 定义 BankService 类（模拟业务层）：
+ *    - 方法：
+ *      • void processTransfer(BankAccount from, BankAccount to, double amount)
+ *        - 捕获 InsufficientBalanceException，包装为 BusinessException 并抛出
+ *        - 捕获 InvalidAccountException，记录日志后重新抛出
+ *        - 使用 try-with-resources 模拟"记录交易日志到文件"
+ *          （提示：创建一个简单的 LogWriter 实现 AutoCloseable）
+ *
+ * 4. 定义 LogWriter 类（实现 AutoCloseable）：
+ *    - 构造器：LogWriter(String accountNo)
+ *    - 方法：
+ *      • void write(String message)：模拟写入日志（打印到控制台即可）
+ *      • void close()：打印"日志流已关闭"
+ *
+ * 5. TestBank 测试类：
+ *    - main 方法测试场景：
+ *      ① 正常转账：账户A(1000) → 账户B(500)，转账300
+ *      ② 余额不足：账户C(100) → 账户D(500)，转账200，捕获异常并打印详细信息
+ *      ③ 金额为负：尝试存款 -100，捕获 InvalidAccountException
+ *      ④ 目标账户为 null：调用 transfer(null, 100)
+ *      ⑤ 转账给自己：account.transfer(account, 100)
+ *
+ *    - 要求：
+ *      • 每个场景用 try-catch 包裹
+ *      • 打印异常堆栈（e.printStackTrace()）
+ *      • 打印最终余额和交易历史
+ *
+ * 交付要求：
+ * - 代码文件：
+ *   • InsufficientBalanceException.java
+ *   • InvalidAccountException.java
+ *   • BankAccount.java
+ *   • BankService.java
+ *   • LogWriter.java
+ *   • TestBank.java
+ *
+ * - 运行截图：
+ *   • 展示5种场景的控制台输出
+ *   • 包含异常堆栈信息
+ *   • 包含"日志流已关闭"提示
+ *
+ * - 思考题：
+ *   ① 为什么 InsufficientBalanceException 继承 Exception 而不是 RuntimeException？
+ *   ② 异常链的作用是什么？什么时候应该使用 `throw new XException("msg", e)`？
+ *   ③ try-with-resources 相比传统 try-finally 有什么优势？
+ */
